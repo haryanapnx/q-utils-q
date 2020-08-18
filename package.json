@@ -1,9 +1,13 @@
 {
-  "name": "q-utils",
+  "name": "q-utils-q",
   "version": "1.0.0",
   "description": "utilities for survival",
    "main": "lib/index.js",
    "types": "lib/index.d.ts",
+   "repository": {
+     "type": "git",
+     "url": "git+https://github.com/haryanapnx/q-utils.git"
+   },
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "tsc",

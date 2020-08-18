@@ -1,9 +1,9 @@
 
 export const convertToRp = (angka: number, currency: string = 'IDR') => {
-   let value = angka.toString().split(".")[0];
+   const value = angka.toString().split(".")[0];
    const space = " ";
    let rupiah = "";
-   let angkarev = value.toString().split("").reverse().join("");
+   const angkarev = value.toString().split("").reverse().join("");
    for (let i = 0; i < angkarev.length; i++)
       if (i % 3 === 0) rupiah += angkarev.substr(i, 3) + ".";
    return (
@@ -16,8 +16,8 @@ export const convertToRp = (angka: number, currency: string = 'IDR') => {
 };
 
 export const titleCase = (str: string, char: string) => {
-   let str_replace = str.toLowerCase().split(char);
-   return str_replace
+   const strReplace = str.toLowerCase().split(char);
+   return strReplace
       .map((item: string) => item.charAt(0).toUpperCase() + item.slice(1))
       .join(" ");
 };
@@ -26,23 +26,23 @@ export const isEmpty = (val: any) => {
    if (val === undefined) return true;
 
    if (
-      typeof val == "function" ||
-      typeof val == "number" ||
-      typeof val == "boolean" ||
+      typeof val === "function" ||
+      typeof val === "number" ||
+      typeof val === "boolean" ||
       Object.prototype.toString.call(val) === "[object Date]"
    )
       return false;
 
-   if (val == null || val.length === 0)
+   if (val === null || val.length === 0)
       // null or 0 length array
       return true;
 
-   if (typeof val == "object") {
+   if (typeof val === "object") {
       // empty object
       let r = true;
 
       // eslint-disable-next-line no-unused-vars
-      for (let _f in val) r = false;
+      for (const _f in val) r = false;
       return r;
    }
    return false;
