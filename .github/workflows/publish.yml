@@ -1,0 +1,67 @@
+name: "🏊🏊🏊 publish"
+
+on: 
+    push: 
+      branches:
+        - master
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+   
+    steps:
+      # Checkout action is required
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Bump Versions
+        uses: michmich112/version-bumper@master
+        with:
+          scheme: semantic
+          version-file: "./package.json"
+          files: "[]" 
+          rules: '[{"trigger":"commit","bump":"build"}, {"trigger":"commit","branch":"release","bump":"major", "reset":["minor","build"]}]'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    name: 🧩🧩 build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm ci
+      - run: npm test
+
+  publish-npm:
+    needs: build
+    name: "☄️ publish"
+    runs-on: ubuntu-latest
+    steps:
+      - name: 💦 checkout
+        uses: actions/checkout@v2
+      - name: 🍄 node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: 💦 publish
+      - run: npm ci
+      - run: npm publish --access public
+        env: 
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+
+  publish-gpr:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
