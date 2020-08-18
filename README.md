@@ -1,4 +1,4 @@
-# q-utils 
+# q-utils-q 
 Npm package utilities for survival.
 
 ## How To Use
