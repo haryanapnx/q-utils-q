@@ -4,6 +4,9 @@
   "description": "utilities for survival",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/haryanapnx/q-utils-q.git"
@@ -28,7 +31,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^26.0.10",
-    "jest": "^26.4.0",
+    "jest": "^26.4.1",
     "prettier": "^2.0.5",
     "ts-jest": "^26.2.0",
     "tslint": "^6.1.3",

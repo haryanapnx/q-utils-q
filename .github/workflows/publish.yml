@@ -1,11 +1,11 @@
 name: "🏊🏊🏊 publish"
 
-on: 
-    push: 
-      branches:
-        - master
-    pull_request:
-      types: [closed]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
@@ -21,39 +21,60 @@ jobs:
           node-version: ${{ matrix.node-version }}
       # - name: Run Jest
       #   uses: stefanoeb/jest-action@1.0.3
-      - run: npm install
-      # - run: npm ci
-      - run: npm test
+      - run: |
+          npm install 
+          npm test
 
-  publish-npm:
-    needs: build
-    # name: "☄️ publish"
+  npm-publish:
+    name: npm-publish
     runs-on: ubuntu-latest
     steps:
-      # - name: 💦 checkout
-      - uses: actions/checkout@v2
-      # - name: 🍄 node
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
-      # - name: 💦 publish
-      # - run: npm ci
-      - run: npm publish --access public
-        env: 
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+    - name: Checkout repository
+      uses: actions/checkout@master
+    - name: Set up Node.js
+      uses: actions/setup-node@master
+      with:
+        node-version: 10.0.0
+    - name: Publish if version has been updated
+      uses: pascalgn/npm-publish-action@06e0830ea83eea10ed4a62654eeaedafb8bf50fc
+      with: # All of theses inputs are optional
+        tag_name: "v%s"
+        tag_message: "v%s"
+        commit_pattern: "^Release (\\S+)"
+        workspace: "."
+      env: # More info about the environment variables in the README
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
+        NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # 
 
-  publish-gpr:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-          registry-url: https://npm.pkg.github.com/
-      # - run: npm ci
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+  # publish-npm:
+  #   needs: build
+  #   # name: "☄️ publish"
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # - name: 💦 checkout
+  #     - uses: actions/checkout@v2
+  #     # - name: 🍄 node
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #         registry-url: https://registry.npmjs.org/
+  #     # - name: 💦 publish
+  #     # - run: npm ci
+  #     - run: npm publish
+  #       env: 
+  #         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+
+  # publish-gpr:
+  #   needs: build
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 12
+  #         registry-url: https://npm.pkg.github.com/
+  #     # - run: npm ci
+  #     - run: npm publish
+  #       env:
+  #         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
