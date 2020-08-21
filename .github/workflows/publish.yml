@@ -1,14 +1,15 @@
-name: "🏊🏊🏊 publish"
+name: "🏊🏊🏊 Publish"
 
 on:
   push:
     branches:
       - master
   pull_request:
-    branches: [master]
+    types: [closed]
 
 jobs:
   build:
+    name: 🧩🧩 Build
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,14 +20,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      # - name: Run Jest
-      #   uses: stefanoeb/jest-action@1.0.3
-      - run: |
+      - name: 🚥 Run Jest
+        run: |
           npm install 
           npm test
 
   npm-publish:
-    name: npm-publish
+    name: ☄️ Npm-publish
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
@@ -45,36 +45,3 @@ jobs:
       env: # More info about the environment variables in the README
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Leave this as is, it's automatically generated
         NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }} # 
-
-  # publish-npm:
-  #   needs: build
-  #   # name: "☄️ publish"
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # - name: 💦 checkout
-  #     - uses: actions/checkout@v2
-  #     # - name: 🍄 node
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 12
-  #         registry-url: https://registry.npmjs.org/
-  #     # - name: 💦 publish
-  #     # - run: npm ci
-  #     - run: npm publish
-  #       env: 
-  #         NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-
-  # publish-gpr:
-  #   needs: build
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #       with:
-  #         node-version: 12
-  #         registry-url: https://npm.pkg.github.com/
-  #     # - run: npm ci
-  #     - run: npm publish
-  #       env:
-  #         NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-
