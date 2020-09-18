@@ -21,9 +21,61 @@ then the return is ```true``` and vice versa
 
 ```javascript 
 
-import { isEmpty, titleCase } from 'q-utils-q'
+import { 
+   convertToRp,
+   titleCase,
+   isEmpty,
+   isEmptyArray,
+   isFunction,
+   isObject,
+   isInteger,
+   isPromise,
+   isNaN,
+   isString 
+} from 'q-utils-q'
 
 // <Examples with number>
+
+isString 
+
+// <convert to RP >
+convertToRp(2000, 'IDR') // will be IDR 2.000
+convertToRp(2000, 'USD') // will be USD 2.000
+
+// <titleCase >
+titleCase('titlecase') // will be Titlecase
+titleCase('title_case', '_') // will be Title Case
+
+// <isEmptyArray > | Boolean
+isEmptyArray([]) // will be true 
+isEmptyArray([1,2,3]) // will be false
+
+// <isFunction > | Boolean
+isFunction(()=>{}) // will be true 
+
+// <isObject > | Boolean
+isObject({}) // will be true 
+isObject({foo:1, bar:2}) // will be true 
+
+// <isInteger > | Boolean
+isInteger(1) // will be true 
+isInteger('string') // will be false 
+
+
+// <isString > | Boolean
+isString('string') // will be true 
+
+// <isNaN > | Boolean
+isNaN(undefined) // will be false;
+isNaN(1) // will be false;
+isNaN('') // will be false;
+isNaN([])// will be false;
+isNaN(NaN)// will be true;
+
+// <isPromise > | Boolean
+const alwaysResolve = (resolve: Function) => resolve();
+const promise = new Promise(alwaysResolve);
+isPromise(promise); // will be true
 
 // Will return false
 console.log(`Check Value 1 result is ${isEmpty(1)}`);
