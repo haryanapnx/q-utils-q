@@ -17,16 +17,17 @@ test('Is Empty Array', () => {
 })
 
 test('Is Function', () => {
-  expect(isFunction(() => { })).toBe(true)
+  expect(isFunction((a: any) => a)).toBe(true)
 })
 
 test('isObject', () => {
-  expect(isObject({})).toBe(true)
+  expect(isObject({ a: 1 })).toBe(true)
 })
 
 test('is Integer', () => {
-  expect(isInteger('string')).toBe(false)
+  expect(isInteger(1)).toBe(false)
 })
+
 test('is string', () => {
   expect(isString('string')).toBe(true)
 })
@@ -34,7 +35,7 @@ test('is string', () => {
 
 describe('isPromise', () => {
   it('verifies that a value is a promise', () => {
-    const alwaysResolve = (resolve: Function) => resolve();
+    const alwaysResolve = (resolve: any) => resolve();
     const promise = new Promise(alwaysResolve);
     expect(isPromise(promise)).toEqual(true);
   });
@@ -49,7 +50,6 @@ describe('isPromise', () => {
     expect(isPromise(identity)).toEqual(false);
     expect(isPromise(foo)).toEqual(false);
     expect(isPromise(answerToLife)).toEqual(false);
-
     expect(isPromise(undefined)).toEqual(false);
     expect(isPromise(null)).toEqual(false);
   });

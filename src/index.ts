@@ -50,11 +50,10 @@ export const isEmptyArray = (value?: any) =>
   Array.isArray(value) && value.length === 0;
 
 /** @private is the given object a Function? */
-export const isFunction = (obj: any): obj is Function =>
-  typeof obj === 'function';
+export const isFunction = (obj: any) => typeof obj === 'function';
 
 /** @private is the given object an Object? */
-export const isObject = (obj: any): obj is Object =>
+export const isObject = (obj: any) =>
   obj !== null && typeof obj === 'object';
 
 /** @private is the given object an integer? */
