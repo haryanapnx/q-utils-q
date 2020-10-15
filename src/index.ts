@@ -72,26 +72,11 @@ export const isNaN = (obj: any): boolean => obj !== obj;
 export const isPromise = (value: any): value is PromiseLike<any> =>
   isObject(value) && isFunction(value.then);
 
-
-// export const sorting = (value) => {
-//    const { sortColumn, sortType, data = [] } = value;
-
-//    if (data.length && sortColumn && sortType) {
-//       data.sort((a, b) => {
-//          let x = a[sortColumn];
-//          let y = b[sortColumn];
-//          if (typeof x === "string") {
-//             x = x.charCodeAt();
-//          }
-//          if (typeof y === "string") {
-//             y = y.charCodeAt();
-//          }
-//          if (sortType === "asc") {
-//             return x - y;
-//          } else {
-//             return y - x;
-//          }
-//       });
-//    }
-//    return data;
-// };
+export const debounce = (callback: Function, wait: any) => {
+  let timeout: any = null
+  return (...args: any) => {
+    const next = () => callback(...args)
+    clearTimeout(timeout)
+    timeout = setTimeout(next, wait)
+  }
+}
