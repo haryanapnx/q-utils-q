@@ -1,4 +1,4 @@
-import { convertToRp, titleCase, isEmpty, isEmptyArray, isFunction, isObject, isInteger, isPromise, isNaN, isString } from '../index';
+import { convertToRp, titleCase, isEmpty, isEmptyArray, isFunction, isObject, isInteger, isPromise, isNaN, isString, debounce } from '../index';
 
 test('Convert currency', () => {
   expect(convertToRp(2000, 'IDR')).toBe('IDR 2.000');
@@ -66,4 +66,22 @@ describe('isNaN', () => {
     expect(isNaN('')).toBe(false);
     expect(isNaN([])).toBe(false);
   });
+});
+
+
+jest.useFakeTimers();
+test('execute just once', () => {
+  const func = jest.fn();
+  const debouncedFunc = debounce(func, 500);
+  // execute for the first time
+  debouncedFunc();
+  // move on the timer
+  jest.advanceTimersByTime(250);
+  // try to execute a 2nd time
+  debouncedFunc();
+
+  // fast-forward time
+  jest.runAllTimers();
+
+  expect(func).toBeCalledTimes(1);
 });
