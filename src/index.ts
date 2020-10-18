@@ -72,11 +72,14 @@ export const isNaN = (obj: any): boolean => obj !== obj;
 export const isPromise = (value: any): value is PromiseLike<any> =>
   isObject(value) && isFunction(value.then);
 
-export const debounce = (callback: Function, wait: any) => {
-  let timeout: any = null
-  return (...args: any) => {
-    const next = () => callback(...args)
-    clearTimeout(timeout)
-    timeout = setTimeout(next, wait)
+
+export function debounce<Params extends any[]>(
+  func: (...args: Params) => any,
+  timeout: number,
+): (...args: Params) => void {
+  let timer: NodeJS.Timeout
+  return (...args: Params) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => { func(...args) }, timeout)
   }
 }
