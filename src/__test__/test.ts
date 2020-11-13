@@ -1,4 +1,4 @@
-import { convertToRp, titleCase, isEmpty, isEmptyArray, isFunction, isObject, isInteger, isPromise, isNaN, isString, debounce } from '../index';
+import { convertToRp, titleCase, isEmpty, isEmptyArray, isFunction, isObject, isInteger, isPromise, isNaN, isString, debounce, getter } from '../index';
 
 test('Convert currency', () => {
   expect(convertToRp(2000, 'IDR')).toBe('IDR 2.000');
@@ -31,7 +31,6 @@ test('is Integer', () => {
 test('is string', () => {
   expect(isString('string')).toBe(true)
 })
-
 
 describe('isPromise', () => {
   it('verifies that a value is a promise', () => {
@@ -66,6 +65,23 @@ describe('isNaN', () => {
     expect(isNaN('')).toBe(false);
     expect(isNaN([])).toBe(false);
   });
+});
+
+describe('getter', () => {
+  const obj = {
+    foo: {
+      foo1: "value"
+    },
+    fooArray: [
+      { key: 'valueArray' }
+    ]
+  };
+
+  it('get value object', () => {
+    expect(getter(obj, 'foo.foo1')).toBe('value');
+    expect(getter(obj, 'fooArray[0].key')).toBe('valueArray');
+  });
+
 });
 
 

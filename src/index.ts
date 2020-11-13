@@ -83,3 +83,11 @@ export function debounce<Params extends any[]>(
     timer = setTimeout(() => { func(...args) }, timeout)
   }
 }
+
+
+export const getter = (obj: any, path: string) =>
+  path
+    .replace(/\[|\]\.?/g, ".")
+    .split(".")
+    .filter((s) => s)
+    .reduce((acc, val) => acc && acc[val], obj);
