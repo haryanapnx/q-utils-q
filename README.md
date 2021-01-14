@@ -6,23 +6,16 @@
 
 
 # q-utils-q 
-Npm package utilities for survival.
+Npm package Javascript utilities for survival.
 
 ## How To Use
 
 ``` npm install q-utils-q --save ```
 
-
-if the value is: 
-```
-null, undefined, 0, ''. 
-```
-then the return is ```true``` and vice versa
-
 ```javascript 
 
 import { 
-   convertToRp,
+   convertCurrency,
    titleCase,
    isEmpty,
    isEmptyArray,
@@ -31,12 +24,13 @@ import {
    isInteger,
    isPromise,
    isNaN,
-   isString 
+   isString,
+   getter,
+   ...
 } from 'q-utils-q'
 
-// <Examples with number>
-
-isString 
+// <isString > | Boolean
+isString('string') 
 
 // <convert to RP >
 convertToRp(2000, 'IDR') // will be IDR 2.000
@@ -77,6 +71,20 @@ const alwaysResolve = (resolve: Function) => resolve();
 const promise = new Promise(alwaysResolve);
 isPromise(promise); // will be true
 
+// <getter > | Boolean
+const obj = {
+    foo: {
+      foo1: "value"
+    },
+    fooArray: [
+      { key: 'valueArray' }
+    ]
+  };
+
+getter(obj, 'foo.foo1')) // result: 'value'
+getter(obj, 'fooArray[0].key')); // result: 'valueArray'
+
+// <isEmpty > | Boolean
 // Will return false
 console.log(`Check Value 1 result is ${isEmpty(1)}`);
 // Will return true

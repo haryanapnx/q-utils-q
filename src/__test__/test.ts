@@ -1,7 +1,7 @@
-import { convertToRp, titleCase, isEmpty, isEmptyArray, isFunction, isObject, isInteger, isPromise, isNaN, isString, debounce, getter } from '../index';
+import { convertCurrency, titleCase, isEmpty, isEmptyArray, isFunction, isObject, isInteger, isPromise, isNaN, isString, debounce, getter } from '../index';
 
 test('Convert currency', () => {
-  expect(convertToRp(2000, 'IDR')).toBe('IDR 2.000');
+  expect(convertCurrency(2000, 'IDR')).toBe('IDR 2.000');
 });
 
 test('Title Case', () => {

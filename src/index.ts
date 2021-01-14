@@ -1,4 +1,4 @@
-export const convertToRp = (angka: number, currency: string = 'IDR') => {
+export const convertCurrency = (angka: number, currency: string = 'IDR') => {
   const value = angka.toString().split('.')[0];
   const space = ' ';
   let rupiah = '';
@@ -83,7 +83,6 @@ export function debounce<Params extends any[]>(
     timer = setTimeout(() => { func(...args) }, timeout)
   }
 }
-
 
 export const getter = (obj: any, path: string) =>
   path

@@ -1,7 +1,7 @@
 {
   "name": "q-utils-q",
-  "version": "1.3.0",
-  "description": "utilities for survival",
+  "version": "1.4.0",
+  "description": "javascript utilities for survival",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
