@@ -19,20 +19,11 @@ export const titleCase = (str: string, char: string) => {
   return strReplace.map((item: string) => item.charAt(0).toUpperCase() + item.slice(1)).join(' ');
 };
 
-export const isEmpty = (val: any) => {
-  if (val === undefined) return true;
-
-  if (
-    typeof val === 'function' ||
-    typeof val === 'number' ||
-    typeof val === 'boolean' ||
-    Object.prototype.toString.call(val) === '[object Date]'
-  )
+export const isEmpty = (val: any): boolean => {
+  if (typeof val === 'function' || typeof val === 'boolean' || Object.prototype.toString.call(val) === '[object Date]')
     return false;
 
-  if (val === null || val.length === 0)
-    // null or 0 length array
-    return true;
+  if (!val || !val.length || val === 0) return true;
 
   if (typeof val === 'object') {
     // empty object
@@ -44,6 +35,7 @@ export const isEmpty = (val: any) => {
   }
   return false;
 };
+
 
 /** @private is the value an empty array? */
 export const isEmptyArray = (value?: any) =>
