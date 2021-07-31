@@ -1,6 +1,6 @@
 {
   "name": "q-utils-q",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "javascript utilities for survival",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

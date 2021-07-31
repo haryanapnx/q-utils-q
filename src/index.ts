@@ -20,17 +20,22 @@ export const titleCase = (str: string, char: string) => {
 };
 
 export const isEmpty = (val: any): boolean => {
-  if (typeof val === 'function' || typeof val === 'boolean' || Object.prototype.toString.call(val) === '[object Date]')
+  if (val === undefined)
+    return true;
+  if (typeof val === 'function' ||
+    typeof val === 'number' ||
+    typeof val === 'boolean' ||
+    Object.prototype.toString.call(val) === '[object Date]')
     return false;
-
-  if (!val || !val.length || val === 0) return true;
-
+  if (val === null || val.length === 0)
+    // null or 0 length array
+    return true;
   if (typeof val === 'object') {
     // empty object
-    let r = true;
-
+    var r = true;
     // eslint-disable-next-line no-unused-vars
-    for (const _f in val) r = false;
+    for (var _f in val)
+      r = false;
     return r;
   }
   return false;
