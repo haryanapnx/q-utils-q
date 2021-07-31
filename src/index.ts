@@ -32,9 +32,9 @@ export const isEmpty = (val: any): boolean => {
     return true;
   if (typeof val === 'object') {
     // empty object
-    var r = true;
+    let r = true;
     // eslint-disable-next-line no-unused-vars
-    for (var _f in val)
+    for (const _f in val)
       r = false;
     return r;
   }
