@@ -32,9 +32,9 @@ import {
 // <isString > | Boolean
 isString('string') 
 
-// <convert to RP >
-convertToRp(2000, 'IDR') // will be IDR 2.000
-convertToRp(2000, 'USD') // will be USD 2.000
+// <convert to currency >
+convertCurrency(2000, 'IDR') // will be IDR 2.000
+convertCurrency(2000, 'USD') // will be USD 2.000
 
 // <titleCase >
 titleCase('titlecase') // will be Titlecase
